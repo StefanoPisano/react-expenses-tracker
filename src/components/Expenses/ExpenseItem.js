@@ -15,4 +15,5 @@ function ExpenseItem({date, title, amount}) {
 	)
 }
 
+
 export default ExpenseItem
