@@ -1,13 +1,14 @@
 import {useState} from "react";
 import './ExpenseForm.css'
 
+const DEFAULT_STATE = {
+	title: '',
+	amount: '',
+	date: ''
+};
 
 function ExpenseForm(props) {
-	const [form, setForm] = useState({
-		title: '',
-		amount: '',
-		date: ''
-	});
+	const [form, setForm] = useState(DEFAULT_STATE);
 
 	const titleChangeHandler = (event) => {
 		setForm((prevState) => {
@@ -37,6 +38,8 @@ function ExpenseForm(props) {
 			amount: form.amount,
 			date: new Date(form.date)
 		})
+
+		setForm(DEFAULT_STATE);
 	}
 
 	return (
