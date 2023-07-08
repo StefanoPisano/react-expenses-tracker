@@ -28,9 +28,7 @@ function NewExpense(props) {
 	function toggleForm() {
 		return showForm
 			? <ExpenseForm onSaveExpense={saveExpenseHandler} onCancelNewExpense={cancelNewExpenseHandler}/>
-			: <div className="new-expense__actions">
-				<button onClick={newExpenseButtonHandler}>New Expense</button>
-			</div>
+			: <button onClick={newExpenseButtonHandler}>New Expense</button>
 	}
 
 	const content = toggleForm();
