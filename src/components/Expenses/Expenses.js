@@ -7,12 +7,16 @@ import ExpensesFilter from "./ExpensesFilter";
 function Expenses(props) {
 	const [yearFilter, setYearFilter] = useState("2022");
 
-	const expenseItems = props.expenses.map(expense =>
-		<ExpenseItem title={expense.title}
-		             date={expense.date}
-		             amount={expense.amount}
+	const filteredItems = props.expenses.filter(expense => expense.date.getFullYear() === parseInt(yearFilter));
+	
+	const expenseItems = filteredItems.map(expense =>
+		<ExpenseItem key={expense.id}
+			title={expense.title}
+			date={expense.date}
+			amount={expense.amount}
 		/>
 	)
+
 
 	const yearFilterHandler = selectedYear => {
 		console.trace("Expenses.js yearFilterHandler", selectedYear);

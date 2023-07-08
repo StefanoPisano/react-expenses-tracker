@@ -6,7 +6,7 @@ function NewExpense(props) {
 		console.trace("NewExpense.js", savedExpense);
 
 		const expense = {
-			id: `u${Math.random()}`,
+			id: `u${crypto.randomUUID()}`,
 			...savedExpense
 		}
 
