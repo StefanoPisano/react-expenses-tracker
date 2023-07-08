@@ -7,7 +7,13 @@ import ExpensesChart from "./ExpensesChart";
 
 
 function Expenses(props) {
-	const [yearFilter, setYearFilter] = useState("2022");
+	const filterValues = [...new Set(props.expenses.map(expense => expense.date.getFullYear()))];
+
+	const [yearFilter, setYearFilter] = useState(filterValues[0] || -1);
+
+	if(yearFilter === -1 && filterValues.length){
+		setYearFilter(filterValues[0]);
+	}
 
 	const yearFilterHandler = selectedYear => {
 		console.trace("Expenses.js yearFilterHandler", selectedYear);
@@ -16,12 +22,11 @@ function Expenses(props) {
 	}
 
 	const filteredItems = props.expenses.filter(expense => expense.date.getFullYear() === parseInt(yearFilter));
-
 	return (
 		<Card className="expenses">
-			<ExpensesFilter selectedYear={yearFilter} onSelectedYear={yearFilterHandler}/>
+			<ExpensesFilter options={filterValues} selectedYear={yearFilter} onSelectedYear={yearFilterHandler}/>
 			<ExpensesChart expenses={filteredItems}></ExpensesChart>
-			<ExpensesList expenses={filteredItems} yearFilter={yearFilter}/>
+			<ExpensesList expenses={filteredItems}/>
 		</Card>
 
 	)

@@ -1,14 +1,12 @@
 import './ExpensesList.css'
 import ExpenseItem from "./ExpenseItem";
 
-const NO_VALUES_MESSAGE = "No available expenses for";
 
-function ExpensesList({expenses, yearFilter}) {
+function ExpensesList({expenses}) {
 	function getExpenseListComponent(expenses) {
 		return expenses.map(expense =>
-			<ul className="expenses-list">
-				<ExpenseItem key={expense.id}
-				             title={expense.title}
+			<ul key={expense.id} className="expenses-list">
+				<ExpenseItem title={expense.title}
 				             date={expense.date}
 				             amount={expense.amount}
 				/>
@@ -18,7 +16,7 @@ function ExpensesList({expenses, yearFilter}) {
 
 	const expenseItems = expenses.length
 		? getExpenseListComponent(expenses) :
-		<h2 className="expenses-list__fallback">{NO_VALUES_MESSAGE} {yearFilter}.</h2>
+		<h2 className="expenses-list__fallback">No available expenses</h2>
 
 	return (
 		<>

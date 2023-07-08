@@ -39,11 +39,6 @@ function ExpenseForm(props) {
 			return false;
 		}
 
-		const date = new Date(form.date);
-		if(!date instanceof Date || !isNaN(date) ) {
-			return false;
-		}
-
 		return true;
 	}
 
