@@ -1,7 +1,9 @@
 import './NewExpense.css'
 import ExpenseForm from "./ExpenseForm";
+import {useState} from "react";
 
 function NewExpense(props) {
+	const [showForm, setShowForm] = useState(false);
 	const saveExpenseHandler = (savedExpense) => {
 		console.trace("NewExpense.js", savedExpense);
 
@@ -10,13 +12,30 @@ function NewExpense(props) {
 			...savedExpense
 		}
 
-
 		props.onNewExpense(expense);
+
+		setShowForm(false);
 	}
+
+	function newExpenseButtonHandler() {
+		setShowForm(true);
+	}
+
+	function cancelNewExpenseHandler() {
+		setShowForm(false);
+	}
+
+	function toggleForm() {
+		return showForm
+			? <ExpenseForm onSaveExpense={saveExpenseHandler} onCancelNewExpense={cancelNewExpenseHandler}/>
+			: <button onClick={newExpenseButtonHandler}>New Expense</button>
+	}
+
+	const content = toggleForm();
 
 	return (
 		<div className="new-expense">
-			<ExpenseForm onSaveExpense={saveExpenseHandler}/>
+			{content}
 		</div>
 	)
 }

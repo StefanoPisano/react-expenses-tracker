@@ -35,9 +35,17 @@ function ExpenseForm(props) {
 
 		props.onSaveExpense({
 			title: form.title,
-			amount: form.amount,
+			amount: +form.amount,
 			date: new Date(form.date)
 		})
+
+		setForm(DEFAULT_STATE);
+	}
+
+	function cancelButtonHandler(event){
+		event.preventDefault();
+
+		props.onCancelNewExpense();
 
 		setForm(DEFAULT_STATE);
 	}
@@ -57,9 +65,10 @@ function ExpenseForm(props) {
 					<label>Date</label>
 					<input type="date" value={form.date} min="2019-01-01" max="2023-12-31" onChange={dateChangeHandler}/>
 				</div>
-				<div className="new-expense__actions">
-					<button type="submit">Add Expense</button>
-				</div>
+			</div>
+			<div className="new-expense__actions">
+				<button type="button" onClick={cancelButtonHandler}>Cancel</button>
+				<button type="submit">Add Expense</button>
 			</div>
 		</form>
 	)
