@@ -30,8 +30,31 @@ function ExpenseForm(props) {
 		})
 	}
 
+	function validateForm(form){
+		if(!form.title || !form.title.length){
+			return false;
+		}
+
+		if(isNaN(form.amount)) {
+			return false;
+		}
+
+		const date = new Date(form.date);
+		if(!date instanceof Date || !isNaN(date) ) {
+			return false;
+		}
+
+		return true;
+	}
+
 	const submitHandler = (event) => {
 		event.preventDefault();
+
+		const isValid = validateForm(form);
+
+		if(!isValid) {
+			return;
+		}
 
 		props.onSaveExpense({
 			title: form.title,
