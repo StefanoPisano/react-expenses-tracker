@@ -4,8 +4,6 @@ import ExpenseItem from "./ExpenseItem";
 const NO_VALUES_MESSAGE = "No available expenses for";
 
 function ExpensesList({expenses, yearFilter}) {
-	const filteredItems = expenses.filter(expense => expense.date.getFullYear() === parseInt(yearFilter));
-
 	function getExpenseListComponent(expenses) {
 		return expenses.map(expense =>
 			<ul className="expenses-list">
@@ -18,8 +16,8 @@ function ExpensesList({expenses, yearFilter}) {
 		)
 	}
 
-	const expenseItems = filteredItems.length
-		? getExpenseListComponent(filteredItems) :
+	const expenseItems = expenses.length
+		? getExpenseListComponent(expenses) :
 		<h2 className="expenses-list__fallback">{NO_VALUES_MESSAGE} {yearFilter}.</h2>
 
 	return (

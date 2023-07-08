@@ -35,7 +35,7 @@ function ExpenseForm(props) {
 
 		props.onSaveExpense({
 			title: form.title,
-			amount: form.amount,
+			amount: +form.amount,
 			date: new Date(form.date)
 		})
 
